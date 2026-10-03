@@ -292,38 +292,10 @@ body {
     background-color: var(--light-gray);
 }
 
-.slider-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: none;
-    border-radius: 50%;
-    color: var(--white);
-    font-size: 1.2rem;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
-}
-
-.slider-btn:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.slider-btn.prev {
-    left: 2rem;
-}
-
-.slider-btn.next {
-    right: 2rem;
-}
-
 .slider-dots {
     position: absolute;
     bottom: 2rem;
-    left: 4rem;
+    right: 4rem;
     display: flex;
     gap: 0.5rem;
 }

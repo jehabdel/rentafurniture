@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const slider = document.querySelector('.slider-wrapper');
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.slider-btn.prev');
-    const nextBtn = document.querySelector('.slider-btn.next');
     
     let currentSlide = 0;
     const totalSlides = slides.length;
@@ -30,15 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function nextSlide() {
         showSlide(currentSlide + 1);
     }
-    
-    // Previous slide
-    function prevSlide() {
-        showSlide(currentSlide - 1);
-    }
-    
-    // Event listeners
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
     
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => showSlide(index));
