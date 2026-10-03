@@ -196,4 +196,86 @@ document.addEventListener('DOMContentLoaded', function() {
             addToCart(product);
         });
     });
+    
+    // View Switcher functionality (Mobile only)
+    setupViewSwitcher();
 });
+
+// View Switcher Setup
+function setupViewSwitcher() {
+    const viewButtons = document.querySelectorAll('.view-btn');
+    const productsGrids = document.querySelectorAll('.products-grid');
+    
+    // Load saved view preference
+    const savedView = localStorage.getItem('productView') || 'two-column';
+    applyView(savedView);
+    
+    // Add click handlers to view buttons
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const view = this.getAttribute('data-view');
+            
+            // Remove active class from all buttons in the same section
+            const section = this.closest('.products-section, .best-selling-section');
+            const sectionButtons = section.querySelectorAll('.view-btn');
+            sectionButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Apply view to the current section's grid
+            const grid = section.querySelector('.products-grid');
+            applyViewToGrid(grid, view);
+            
+            // Save preference
+            localStorage.setItem('productView', view);
+            
+            // Sync all other view switchers
+            syncViewSwitchers(view);
+        });
+    });
+}
+
+function applyView(view) {
+    const productsGrids = document.querySelectorAll('.products-grid');
+    productsGrids.forEach(grid => {
+        applyViewToGrid(grid, view);
+    });
+    
+    // Update all buttons
+    const viewButtons = document.querySelectorAll('.view-btn');
+    viewButtons.forEach(button => {
+        if (button.getAttribute('data-view') === view) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+}
+
+function applyViewToGrid(grid, view) {
+    grid.classList.remove('two-column', 'single-column', 'list-view');
+    
+    if (view === 'single-column') {
+        grid.classList.add('single-column');
+    } else if (view === 'list-view') {
+        grid.classList.add('list-view');
+    }
+    // two-column is the default (no class needed)
+}
+
+function syncViewSwitchers(view) {
+    const viewButtons = document.querySelectorAll('.view-btn');
+    viewButtons.forEach(button => {
+        if (button.getAttribute('data-view') === view) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+    
+    const productsGrids = document.querySelectorAll('.products-grid');
+    productsGrids.forEach(grid => {
+        applyViewToGrid(grid, view);
+    });
+}
